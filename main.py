@@ -42,7 +42,9 @@ class CommandThread(QThread):
 
     def execute_command(self, command):
         keyboard.press_and_release('t')
+        time.sleep(0.10)
         keyboard.write(command, delay=1/self.typing_speed)
+        time.sleep(0.10)
         keyboard.press_and_release('enter')
         self.command_executed.emit(f"Выполнено: {command}")
 
@@ -75,6 +77,7 @@ class AddCommandDialog(QDialog):
         self.cancel_button = QPushButton("Отмена", self)
         self.cancel_button.clicked.connect(self.reject)
         button_layout.addWidget(self.cancel_button)
+        
         
         layout.addLayout(button_layout)
         self.setLayout(layout)
